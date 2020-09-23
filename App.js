@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {View, StatusBar, StyleSheet} from 'react-native';
 
@@ -6,14 +6,30 @@ import Card from './components/Card';
 import Form from './components/Form';
 
 const App = () => {
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardName, setCardName] = useState('');
+  const [cardExpiry, setCardExpiry] = useState('');
+  const [cardCode, setCardCode] = useState('');
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <View style={styles.topContainer}>
-        <Card />
+        <Card {...{cardNumber, cardName, cardExpiry, cardCode}} />
       </View>
       <View style={styles.bottomContainer}>
-        <Form />
+        <Form
+          {...{
+            cardNumber,
+            setCardNumber,
+            cardName,
+            setCardName,
+            cardExpiry,
+            setCardExpiry,
+            cardCode,
+            setCardCode,
+          }}
+        />
       </View>
     </View>
   );

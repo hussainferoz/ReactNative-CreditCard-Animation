@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {
   StyleSheet,
@@ -8,7 +9,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const Form = () => {
+const Form = ({
+  cardNumber,
+  setCardNumber,
+  cardName,
+  setCardName,
+  cardExpiry,
+  setCardExpiry,
+  cardCode,
+  setCardCode,
+}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -16,8 +26,11 @@ const Form = () => {
           <Text style={styles.text}>Card Number</Text>
           <TextInput
             style={styles.input}
+            keyboardType="number-pad"
             placeholder="3534 3500 0000 3654"
             placeholderTextColor="#8c8c8c"
+            value={cardNumber}
+            onChangeText={(text) => setCardNumber(text)}
           />
         </View>
 
@@ -26,17 +39,22 @@ const Form = () => {
             <Text style={styles.text}>Expiry Date</Text>
             <TextInput
               style={styles.input}
-              placeholder="03/21"
+              placeholder="MM/YY"
               placeholderTextColor="#8c8c8c"
+              value={cardExpiry}
+              onChangeText={(text) => setCardExpiry(text)}
             />
           </View>
 
           <View style={[styles.view, {flex: 1, paddingLeft: 10}]}>
             <Text style={styles.text}>Secure Code</Text>
             <TextInput
+              keyboardType="number-pad"
               style={styles.input}
               placeholder="142"
               placeholderTextColor="#8c8c8c"
+              value={cardCode}
+              onChangeText={(text) => setCardCode(text)}
             />
           </View>
         </View>
@@ -47,6 +65,8 @@ const Form = () => {
             style={styles.input}
             placeholder="Hussain Feroz"
             placeholderTextColor="#8c8c8c"
+            value={cardName}
+            onChangeText={(text) => setCardName(text)}
           />
         </View>
       </View>
@@ -59,6 +79,17 @@ const Form = () => {
 };
 
 export default Form;
+
+Form.propTypes = {
+  cardNumber: PropTypes.string,
+  cardName: PropTypes.string,
+  cardExpiry: PropTypes.string,
+  cardCode: PropTypes.string,
+  setCardNumber: PropTypes.func,
+  setCardName: PropTypes.func,
+  setCardExpiry: PropTypes.func,
+  setCardCode: PropTypes.func,
+};
 
 const styles = StyleSheet.create({
   container: {
