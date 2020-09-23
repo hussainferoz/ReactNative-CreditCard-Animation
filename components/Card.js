@@ -6,7 +6,7 @@ const {width, height} = Dimensions.get('window');
 
 const Card = () => {
   return (
-    <View style={styles.cardContainer}>
+    <View style={styles.container}>
       <View style={styles.card}></View>
     </View>
   );
@@ -15,7 +15,7 @@ const Card = () => {
 export default Card;
 
 const styles = StyleSheet.create({
-  cardContainer: {
+  container: {
     width: width - 60,
     height: height / 3.5,
   },

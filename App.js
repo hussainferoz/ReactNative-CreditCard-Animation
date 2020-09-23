@@ -3,6 +3,7 @@ import React from 'react';
 import {View, StatusBar, StyleSheet} from 'react-native';
 
 import Card from './components/Card';
+import Form from './components/Form';
 
 const App = () => {
   return (
@@ -11,7 +12,9 @@ const App = () => {
       <View style={styles.topContainer}>
         <Card />
       </View>
-      <View style={styles.bottomContainer}></View>
+      <View style={styles.bottomContainer}>
+        <Form />
+      </View>
     </View>
   );
 };
