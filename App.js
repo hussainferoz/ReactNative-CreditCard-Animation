@@ -1,16 +1,17 @@
 import React from 'react';
-import {View, StatusBar, StyleSheet, Dimensions} from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+import {View, StatusBar, StyleSheet} from 'react-native';
+
+import Card from './components/Card';
 
 const App = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
-      <View style={styles.cardContainer}>
-        <View style={styles.card}></View>
+      <View style={styles.topContainer}>
+        <Card />
       </View>
-      <View style={styles.formContainer}></View>
+      <View style={styles.bottomContainer}></View>
     </View>
   );
 };
@@ -20,19 +21,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2b92e4',
   },
-  cardContainer: {
+  topContainer: {
     flex: 2,
     backgroundColor: '#2b92e4',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  card: {
-    width: width - 60,
-    height: height / 3.5,
-    borderRadius: 20,
-    backgroundColor: '#f8b5c1',
-  },
-  formContainer: {
+  bottomContainer: {
     flex: 3,
     backgroundColor: '#fff',
     borderTopLeftRadius: 35,
