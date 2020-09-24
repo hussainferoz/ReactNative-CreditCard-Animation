@@ -18,7 +18,7 @@ const App = () => {
   const animation = (value) => {
     timing(cardAnimation, {
       toValue: value,
-      duration: 1000,
+      duration: 500,
       useNativeDriver: true,
     }).start();
   };
@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#2b92e4',
   },
   topContainer: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#2b92e4',
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomContainer: {
-    flex: 3,
+    flex: 1,
     backgroundColor: '#fff',
     borderTopLeftRadius: 35,
     borderTopRightRadius: 35,

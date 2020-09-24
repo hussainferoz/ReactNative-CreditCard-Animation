@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   StyleSheet,
+  ScrollView,
   Text,
   View,
   TextInput,
@@ -21,7 +22,7 @@ const Form = ({
   animation,
 }) => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View>
         <View style={styles.view}>
           <Text style={styles.text}>Card Number</Text>
@@ -79,7 +80,7 @@ const Form = ({
       <TouchableOpacity style={styles.button}>
         <Text style={[styles.text, {color: '#000'}]}>Pay</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     margin: 20,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
   view: {
-    marginVertical: 3,
+    marginVertical: 5,
   },
   text: {
     fontSize: 20,
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   button: {
+    marginVertical: 20,
     backgroundColor: '#e3d474',
     height: 60,
     borderRadius: 10,
