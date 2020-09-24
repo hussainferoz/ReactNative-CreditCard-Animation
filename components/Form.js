@@ -21,6 +21,11 @@ const Form = ({
   setCardCode,
   animation,
 }) => {
+  const codeValidate = new RegExp('^[0-9]{1,3}$');
+  const expiryValidate = new RegExp('^[0-9/]{1,5}$');
+  const nameValidate = new RegExp('^[a-zA-z ]*$');
+  const numberValidate = new RegExp('^[0-9]{1,16}$');
+
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -32,7 +37,10 @@ const Form = ({
             placeholder="3534 3500 0000 3654"
             placeholderTextColor="#8c8c8c"
             value={cardNumber}
-            onChangeText={(text) => setCardNumber(text)}
+            onChangeText={(text) => {
+              if (text.length === 0) return setCardNumber(text);
+              if (numberValidate.test(text)) setCardNumber(text);
+            }}
             onFocus={() => animation(0)}
           />
         </View>
@@ -45,7 +53,10 @@ const Form = ({
               placeholder="MM/YY"
               placeholderTextColor="#8c8c8c"
               value={cardExpiry}
-              onChangeText={(text) => setCardExpiry(text)}
+              onChangeText={(text) => {
+                if (text.length === 0) return setCardExpiry(text);
+                if (expiryValidate.test(text)) setCardExpiry(text);
+              }}
               onFocus={() => animation(0)}
             />
           </View>
@@ -58,7 +69,10 @@ const Form = ({
               placeholder="142"
               placeholderTextColor="#8c8c8c"
               value={cardCode}
-              onChangeText={(text) => setCardCode(text)}
+              onChangeText={(text) => {
+                if (text.length === 0) return setCardCode(text);
+                if (codeValidate.test(text)) setCardCode(text);
+              }}
               onFocus={() => animation(1)}
             />
           </View>
@@ -71,7 +85,10 @@ const Form = ({
             placeholder="Hussain Feroz"
             placeholderTextColor="#8c8c8c"
             value={cardName}
-            onChangeText={(text) => setCardName(text)}
+            onChangeText={(text) => {
+              if (text.length === 0) return setCardName(text);
+              if (nameValidate.test(text)) setCardName(text);
+            }}
             onFocus={() => animation(0)}
           />
         </View>
