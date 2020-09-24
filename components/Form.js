@@ -18,6 +18,7 @@ const Form = ({
   setCardExpiry,
   cardCode,
   setCardCode,
+  animation,
 }) => {
   return (
     <View style={styles.container}>
@@ -31,6 +32,7 @@ const Form = ({
             placeholderTextColor="#8c8c8c"
             value={cardNumber}
             onChangeText={(text) => setCardNumber(text)}
+            onFocus={() => animation(0)}
           />
         </View>
 
@@ -43,6 +45,7 @@ const Form = ({
               placeholderTextColor="#8c8c8c"
               value={cardExpiry}
               onChangeText={(text) => setCardExpiry(text)}
+              onFocus={() => animation(0)}
             />
           </View>
 
@@ -55,6 +58,7 @@ const Form = ({
               placeholderTextColor="#8c8c8c"
               value={cardCode}
               onChangeText={(text) => setCardCode(text)}
+              onFocus={() => animation(1)}
             />
           </View>
         </View>
@@ -67,6 +71,7 @@ const Form = ({
             placeholderTextColor="#8c8c8c"
             value={cardName}
             onChangeText={(text) => setCardName(text)}
+            onFocus={() => animation(0)}
           />
         </View>
       </View>
@@ -89,6 +94,7 @@ Form.propTypes = {
   setCardName: PropTypes.func,
   setCardExpiry: PropTypes.func,
   setCardCode: PropTypes.func,
+  animation: PropTypes.func,
 };
 
 const styles = StyleSheet.create({

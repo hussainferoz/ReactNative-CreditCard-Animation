@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
-import {View, StatusBar, StyleSheet} from 'react-native';
+import {View, StatusBar, StyleSheet, Animated} from 'react-native';
 
 import Card from './components/Card';
 import Form from './components/Form';
+
+const {Value, timing} = Animated;
 
 const App = () => {
   const [cardNumber, setCardNumber] = useState('');
@@ -11,11 +13,23 @@ const App = () => {
   const [cardExpiry, setCardExpiry] = useState('');
   const [cardCode, setCardCode] = useState('');
 
+  const cardAnimation = useRef(new Value(0)).current;
+
+  const animation = (value) => {
+    timing(cardAnimation, {
+      toValue: value,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
       <View style={styles.topContainer}>
-        <Card {...{cardNumber, cardName, cardExpiry, cardCode}} />
+        <Card
+          {...{cardNumber, cardName, cardExpiry, cardCode, cardAnimation}}
+        />
       </View>
       <View style={styles.bottomContainer}>
         <Form
@@ -28,6 +42,7 @@ const App = () => {
             setCardExpiry,
             cardCode,
             setCardCode,
+            animation,
           }}
         />
       </View>
