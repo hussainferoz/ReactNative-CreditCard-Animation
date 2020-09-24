@@ -21,13 +21,17 @@ const Form = ({
   setCardCode,
   animation,
 }) => {
-  const codeValidate = new RegExp('^[0-9]{1,3}$');
-  const expiryValidate = new RegExp('^[0-9/]{1,5}$');
   const nameValidate = new RegExp('^[a-zA-z ]*$');
-  const numberValidate = new RegExp('^[0-9]{1,16}$');
+
+  const refresh = () => {
+    setCardNumber('');
+    setCardName('');
+    setCardExpiry('');
+    setCardCode('');
+  };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View>
         <View style={styles.view}>
           <Text style={styles.text}>Card Number</Text>
@@ -37,9 +41,15 @@ const Form = ({
             placeholder="3534 3500 0000 3654"
             placeholderTextColor="#8c8c8c"
             value={cardNumber}
+            maxLength={19}
             onChangeText={(text) => {
-              if (text.length === 0) return setCardNumber(text);
-              if (numberValidate.test(text)) setCardNumber(text);
+              let formattedText = text.split(' ').join('');
+              if (formattedText.length > 0) {
+                formattedText = formattedText
+                  .match(new RegExp('.{1,4}', 'g'))
+                  .join(' ');
+              }
+              setCardNumber(formattedText);
             }}
             onFocus={() => animation(0)}
           />
@@ -49,13 +59,21 @@ const Form = ({
           <View style={[styles.view, {flex: 1, paddingRight: 10}]}>
             <Text style={styles.text}>Expiry Date</Text>
             <TextInput
+              keyboardType="number-pad"
               style={styles.input}
               placeholder="MM/YY"
               placeholderTextColor="#8c8c8c"
               value={cardExpiry}
+              maxLength={5}
               onChangeText={(text) => {
-                if (text.length === 0) return setCardExpiry(text);
-                if (expiryValidate.test(text)) setCardExpiry(text);
+                let formattedText = text.split('/').join('');
+                if (formattedText.length > 0) {
+                  formattedText = formattedText
+                    .match(new RegExp('.{1,2}', 'g'))
+                    .join('/');
+                }
+
+                setCardExpiry(formattedText);
               }}
               onFocus={() => animation(0)}
             />
@@ -69,10 +87,8 @@ const Form = ({
               placeholder="142"
               placeholderTextColor="#8c8c8c"
               value={cardCode}
-              onChangeText={(text) => {
-                if (text.length === 0) return setCardCode(text);
-                if (codeValidate.test(text)) setCardCode(text);
-              }}
+              maxLength={3}
+              onChangeText={(text) => setCardCode(text)}
               onFocus={() => animation(1)}
             />
           </View>
@@ -85,6 +101,7 @@ const Form = ({
             placeholder="Hussain Feroz"
             placeholderTextColor="#8c8c8c"
             value={cardName}
+            maxLength={15}
             onChangeText={(text) => {
               if (text.length === 0) return setCardName(text);
               if (nameValidate.test(text)) setCardName(text);
@@ -94,7 +111,7 @@ const Form = ({
         </View>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={refresh}>
         <Text style={[styles.text, {color: '#000'}]}>Pay</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -119,7 +136,6 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     margin: 20,
-    // justifyContent: 'space-between',
   },
   view: {
     marginVertical: 5,

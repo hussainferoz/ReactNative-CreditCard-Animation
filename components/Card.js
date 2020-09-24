@@ -32,7 +32,15 @@ const Card = ({cardNumber, cardName, cardExpiry, cardCode, cardAnimation}) => {
         <View style={styles.top} />
         <View style={styles.view}>
           <View style={styles.middle} />
-          <Text style={[styles.text, {flex: 1, paddingLeft: 10}]}>
+          <Text
+            style={[
+              styles.text,
+              {
+                flex: 1,
+                paddingLeft: 10,
+                paddingTop: 5,
+              },
+            ]}>
             {cardCode}
           </Text>
         </View>
